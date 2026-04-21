@@ -56,8 +56,14 @@
             margin-bottom: 20px;
         }
 
+        .round {
+            font-size: 1.25em;
+            font-weight: bold;
+            color: black;
+        }
+
         .score {
-            font-size: 1.5em;
+            font-size: 1.25em;
             font-weight: bold;
             color: #0d47a1;
         }
@@ -90,7 +96,6 @@
                 transform: translate(-50%, -25px);
             }
         }
-
 
         /* Kartenbereich */
         .cards {
@@ -297,9 +302,9 @@
             <a href="index.html" class="back-button">⬅ Startseite</a>
 
             <div class="score-container">
-                <div>Runde: <span id="round">1</span>/30</div>
-                <div class="score">Punkte: <span id="score">100</span></div>
                 <div class="score total">Gesamt: <span id="totalScore">0</span></div>
+                <div class="score">Punkte: <span id="score">100</span></div>
+                <div class="round">Runde: <span id="round">1</span>/30</div>
                 <div id="score-popup" class="score-popup"></div>
             </div>
         </div>

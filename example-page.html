@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiel 1 – AHS Kenyongasse</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+
+            background:
+                linear-gradient(135deg, rgba(111,168,220,0.9), rgba(164,194,244,0.9)),
+                url("https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp");
+
+            background-size: cover, 60%;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #C7DCD2;
+        }
+
+        header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin: 0;
+            color: #2f4f4f;
+        }
+
+        /* 👉 ZENTRALES "BLATT" */
+        .content-box {
+            background: white;
+            color: #333;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: left;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .content-box h2 {
+            margin-top: 0;
+            color: #0d47a1;
+        }
+
+        .content-box h3 {
+            margin-top: 30px;
+            color: #2f4f4f;
+        }
+
+        .content-box p {
+            line-height: 1.6;
+        }
+
+        .steps {
+            padding-left: 20px;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #8FAF9F;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .back-button:hover {
+            background: #6f9f8f;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.9em;
+            background-color: #C7DCD2;
+            color: #2f4f4f;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .content-box {
+                margin: 20px;
+                padding: 25px;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header img {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp" alt="AHS Kenyongasse Logo">
+    <h1>100 Jahre AHS Kenyongasse</h1>
+</header>
+
+<div class="content-box">
+    <h2>🧠 Beispielspiel: Das große Schulquiz</h2>
+
+    <p>
+        In diesem Quiz testen die Schülerinnen und Schüler ihr Wissen über die AHS Kenyongasse,
+        ihre Geschichte und verschiedene Unterrichtsfächer.
+    </p>
+
+    <h3>🎯 Ziel des Spiels</h3>
+    <p>
+        Die Teilnehmer beantworten möglichst viele Fragen richtig und sammeln Punkte.
+    </p>
+
+    <h3>📋 Ablauf</h3>
+    <ol class="steps">
+        <li>Die Lehrperson öffnet das Quiz und liest die erste Frage vor.</li>
+        <li>Die Schülerinnen und Schüler überlegen gemeinsam die Antwort.</li>
+        <li>Die Antwort wird ausgewählt oder genannt.</li>
+        <li>Punkte werden vergeben (optional).</li>
+        <li>Das Spiel wird mit der nächsten Frage fortgesetzt.</li>
+    </ol>
+
+    <h3>👥 Gruppengröße</h3>
+    <p>
+        Einzelarbeit oder in kleinen Gruppen (2–4 Personen).
+    </p>
+
+    <a href="index.html" class="back-button">⬅ Zurück zur Startseite</a>
+</div>
+
+<footer>
+    © AHS Kenyongasse – 100 Jahre Jubiläumsfeier
+</footer>
+
+</body>
+</html>

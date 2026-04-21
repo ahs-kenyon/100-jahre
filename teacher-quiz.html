@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lehrer-Quiz</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+
+            background:
+                linear-gradient(135deg, rgba(111, 168, 220, 0.9), rgba(164, 194, 244, 0.9)),
+                url("https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp");
+
+            background-size: cover, 60%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #C7DCD2;
+        }
+
+        header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            color: #2f4f4f;
+            margin: 0;
+        }
+
+        .content-box {
+            background: white;
+            color: #333;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Punkteanzeige */
+        /*
+        .score {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #0d47a1;
+        }
+        */
+
+        .score-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+
+        /* 👉 Popup-Animation */
+        .score-popup {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #d32f2f;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .score-popup.animate {
+            animation: floatUp 0.8s ease forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -25px);
+            }
+        }
+
+
+        /* Kartenbereich */
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /*
+.card {
+    width: 100%;
+    height: 90px;
+    perspective: 1000px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+
+    border-radius: 12px;     
+    overflow: hidden;        
+}
+*/
+
+        .card {
+            width: 100%;
+            height: 90px;
+            perspective: 1000px;
+            cursor: pointer;
+
+            border-radius: 12px;
+            overflow: hidden;
+
+            /* 👉 Material-Schatten (ruhig) */
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                0 6px 12px rgba(0, 0, 0, 0.08);
+
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /*
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+*/
+
+        .card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 6px 12px rgba(0, 0, 0, 0.15),
+                0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .card:active {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 3px 6px rgba(0, 0, 0, 0.12),
+                0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* 👉 zentriert */
+            padding: 15px 20px;
+            box-sizing: border-box;
+
+            text-align: center;
+            /* 👉 Text mittig */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* Vorderseite */
+        .card-front {
+            background: #8FAF9F;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Rückseite */
+        .card-back {
+            background: #f3faf6;
+            color: #333;
+            border: 2px solid #8FAF9F;
+            transform: rotateY(180deg);
+        }
+
+        /* Buttons */
+        .controls {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 18px;
+            margin: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            background: #8FAF9F;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #6f9f8f;
+        }
+
+        /* Lösung */
+        .solution {
+            margin-top: 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #C7DCD2;
+            color: #2f4f4f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp">
+        <h1>100 Jahre AHS Kenyongasse</h1>
+    </header>
+
+    <div class="content-box">
+
+        <h2>🕵️ Lehrer erraten</h2>
+
+        <div class="score-container">
+            <div class="score">Punkte: <span id="score">100</span></div>
+            <div id="score-popup" class="score-popup"></div>
+        </div>
+
+        <div class="cards" id="cards"></div>
+
+        <div class="controls">
+            <button onclick="showSolution()">Lösung anzeigen</button>
+        </div>
+
+        <div class="solution" id="solution"></div>
+
+    </div>
+
+    <footer>
+        © AHS Kenyongasse – 100 Jahre Jubiläumsfeier
+    </footer>
+
+    <script>
+
+        /* 👉 DEINE DATEN */
+        const quizData = {
+            name: "Max Mustermann",
+            hints: [
+                "Ich unterrichte Mathematik",
+                "Ich leite die Schach-AG",
+                "Ich bin seit über 10 Jahren an der Schule",
+                "Ich bin bekannt für schwierige Tests"
+            ]
+        };
+
+        let score = 100;
+
+        /* 👉 Karten beim Laden erstellen */
+        function createCards() {
+            const container = document.getElementById("cards");
+
+            quizData.hints.forEach((hint, index) => {
+
+                const card = document.createElement("div");
+                card.className = "card";
+                card.dataset.flipped = "false";
+
+                card.innerHTML = `
+            <div class="card-inner">
+                <div class="card-front">Hinweis ${index + 1}</div>
+                <div class="card-back">${hint}</div>
+            </div>
+        `;
+
+                card.addEventListener("click", () => flipCard(card));
+
+                container.appendChild(card);
+            });
+        }
+
+        /* 👉 Karte umdrehen */
+        function flipCard(card) {
+            if (card.dataset.flipped === "true") return;
+
+            card.classList.add("flipped");
+            card.dataset.flipped = "true";
+
+            score -= 10;
+            if (score < 0) score = 0;
+
+            document.getElementById("score").innerText = score;
+
+            /* 👉 Punkte-Animation */
+            const popup = document.getElementById("score-popup");
+            popup.innerText = "-10";
+            popup.classList.remove("animate"); // reset
+            void popup.offsetWidth; // Trick zum Neustarten der Animation
+            popup.classList.add("animate");
+        }
+
+        /* 👉 Lösung anzeigen */
+        function showSolution() {
+            document.getElementById("solution").innerText = "Lösung: " + quizData.name;
+        }
+
+        /* 👉 Start */
+        createCards();
+
+    </script>
+
+</body>
+
+</html>

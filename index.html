@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Jahre AHS Kenyongasse</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+
+            background:
+                linear-gradient(135deg, rgba(111, 168, 220, 0.9), rgba(164, 194, 244, 0.9)),
+                url("https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp");
+
+            background-size: cover, 60%;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #C7DCD2;
+            animation: fadeIn 1s ease-in;
+        }
+
+        header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin: 0;
+            color: #2f4f4f;
+        }
+
+        .intro {
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .intro h2 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            font-size: 1.15em;
+            line-height: 1.6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* 👉 BUTTONS (neue Variante B) */
+        .button {
+            background: #f3faf6;
+            /* ganz leicht grünlich */
+            border: 2px solid #8FAF9F;
+            /* Logo-Grün Rahmen */
+            color: #0d47a1;
+            padding: 30px 15px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.25s, box-shadow 0.25s, background 0.25s, border 0.25s;
+        }
+
+        .button span {
+            font-size: 1.8em;
+        }
+
+        .button:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            background: #e6f3ec;
+            /* etwas stärkeres Hellgrün */
+            border-color: #6f9f8f;
+            /* etwas kräftiger im Hover */
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.9em;
+            background-color: #C7DCD2;
+            color: #2f4f4f;
+        }
+
+        /* Animationen */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header img {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp" alt="AHS Kenyongasse Logo">
+        <h1>100 Jahre AHS Kenyongasse</h1>
+    </header>
+
+    <section class="intro">
+        <h2>Willkommen zum Jubiläumsfest!</h2>
+        <p>
+            Die AHS Kenyongasse feiert ihr 100-jähriges Bestehen – ein Jahrhundert voller Bildung,
+            Gemeinschaft und gelebter Schultradition.
+        </p>
+        <p>
+            Wählen Sie eine Station aus und starten Sie direkt mit einem Spiel oder Quiz!
+        </p>
+    </section>
+
+    <section class="grid">
+        <a href="#" class="button"><span>🧠</span>Quiz 1</a>
+        <a href="#" class="button"><span>🎯</span>Spiel 2</a>
+        <a href="#" class="button"><span>📚</span>Wissenstest</a>
+
+        <a href="#" class="button"><span>🎲</span>Spiel 4</a>
+        <a href="#" class="button"><span>🏫</span>Schulquiz</a>
+        <a href="#" class="button"><span>🕵️</span>Rätsel</a>
+
+        <a href="#" class="button"><span>⚡</span>Schnellrunde</a>
+        <a href="#" class="button"><span>🎤</span>Challenge</a>
+        <a href="#" class="button"><span>🏆</span>Finale</a>
+    </section>
+
+    <footer>
+        © AHS Kenyongasse – 100 Jahre Jubiläumsfeier
+    </footer>
+
+</body>
+
+</html>

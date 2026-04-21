@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiel 1 – AHS Kenyongasse</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+
+            background:
+                linear-gradient(135deg, rgba(111, 168, 220, 0.9), rgba(164, 194, 244, 0.9)),
+                url("https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp");
+
+            background-size: cover, 60%;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #C7DCD2;
+        }
+
+        header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin: 0;
+            color: #2f4f4f;
+        }
+
+        .content-box {
+            background: white;
+            color: #333;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .content-box h2 {
+            margin-top: 0;
+            color: #0d47a1;
+        }
+
+        .content-box h3 {
+            margin-top: 30px;
+            color: #2f4f4f;
+        }
+
+        .content-box p {
+            line-height: 1.6;
+        }
+
+        .steps {
+            padding-left: 20px;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #8FAF9F;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .back-button:hover {
+            background: #6f9f8f;
+        }
+
+        .menu-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #8FAF9F;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .menu-button:hover {
+            background: #6f9f8f;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.9em;
+            background-color: #C7DCD2;
+            color: #2f4f4f;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .content-box {
+                margin: 20px;
+                padding: 25px;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header img {
+                margin-bottom: 10px;
+            }
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp" alt="AHS Kenyongasse Logo">
+        <h1>100 Jahre AHS Kenyongasse</h1>
+    </header>
+
+    <div class="content-box">
+        <div class="top-bar">
+            <a href="index.html" class="back-button">⬅ Startseite</a>
+        </div>
+
+        <h2>🧩 KENYON-MEMORY</h2>
+
+        <p>
+            <strong>DAUER: </strong>ca. 15 Minuten
+        </p>
+
+        <h3>🎯 Ziel des Spiels</h3>
+        <p>
+            Findet die ungleichen Paare, die zusammengehören!
+        </p>
+
+        <h3>📋 Ablauf</h3>
+        <ol class="steps">
+            <li>Die Klasse teilt sich in <strong>2 Teams</strong> auf. Die Lehrperson ist SchiedsrichterIn.</li>
+            <li>Alle Memorykarten werden mittig in der Klasse auf den Tischen verdeckt aufgelegt.</li>
+            <li><strong>Abwechselnd</strong> deckt ein Team <strong>zwei</strong> Karten auf.</li>
+            <li>Findet das Team dabei ein Paar, bekommt das Team einen Punkt und darf erneut ziehen.</li>
+            <li>Werden Kartenaufgedeckt die kein Paar sind, müssen die Karten wieder verdeckt werden und das andere Team
+                ist am Zug.</li>
+            <li>Wenn alle Paare gefunden wurden, gewinnt das Team mit der höchsten Punktezahl. <strong>(1 Punkt pro
+                    Paar)</strong></li>
+        </ol>
+
+        <h3>🔎 Hinweise</h3>
+        <p>
+            Folgende Paare können gefunden werden:
+        </p>
+        <ul class="steps">
+            <li>zwei Lehrpersonen, die <strong>am längsten/am kürzesten</strong> an der Schule unterrichten</li>
+            <li>zwei Lehrpersonen, die genau <strong>die gleiche Fächerkombination</strong> unterrichten</li>
+            <li>zwei Lehrpersonen, die <strong>gemeinsam Klassenvorstände</strong> einer Klasse sind</li>
+            <li>zwei Lehrpersonen, die schon <strong>seit ihrer Jugend befreundet</strong> sind</li>
+            <li>zwei Lehrpersonen, die <strong>Geschwister</strong> sind</li>
+            <li>zwei Lehrpersonen, die <strong>beide SchülerberaterInnen</strong> sind</li>
+            <li>zwei Lehrpersonen, die <strong>selbst SchülerInnen an der Kenyongasse</strong> waren</li>
+            <li>das <strong>Schulbuffet und ein Gericht</strong>, das du dort bekommen könntest</li>
+            <li>die Bibliothek und etwas Altmodisches</strong>, das du dort findest</li>
+            <li>zwei Orte, die du <strong>mit dem Hort</strong> verbinden kannst</li>
+            <li><strong>Schwester Johanna</strong> und etwas, das sie <strong>herstellt</strong></li>
+            <li>das <strong>Küchenteam und ein Gericht</strong>, das du von ihnen bekommen könntest</li>
+            <li><strong>Professor Rissling/Kropatschek</strong> und etwas, das du siehst, wenn du vor ihrer Tür</strong>
+                stehst
+            </li>
+            <li><strong>frühere DirektorInnen und jemanden</strong>, der zu ihnen passt</li>
+            <li>das <strong>ehemalige Schulschwimmbad</strong> und wann es <strong>geschlossen</strong> wurde</li>
+        </ul>
+
+        <h3>⬇️ Downloads (PDF)</h3>
+        <a href="Lösungen/Lösung-Memory.pdf" class="menu-button" target="_blank">Lösung</a>
+    </div>
+
+    <footer>
+        © AHS Kenyongasse
+    </footer>
+
+</body>
+
+</html>

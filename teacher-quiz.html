@@ -480,7 +480,7 @@
                 <span id="finalScore">0</span>
             </div>
 
-            <button onclick="restartGame()">Neues Spiel starten</button>
+            <!--<button onclick="restartGame()">Neues Spiel starten</button>-->
         </div>
 
         <div class="controls">
@@ -532,7 +532,7 @@
 
         /* 👉 Lehrer laden */
         function loadNextTeacher() {
-            if (remainingTeachers.length === 0 || round > 3) {
+            if (remainingTeachers.length === 0 || round > 10) {
                 endGame();
                 return;
             }

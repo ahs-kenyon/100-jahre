@@ -50,16 +50,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* Punkteanzeige */
-        /*
-        .score {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #0d47a1;
-        }
-        */
-
         .score-container {
             position: relative;
             display: inline-block;
@@ -193,7 +183,7 @@
 
         /* Frage oben */
         .question {
-            font-size: 0.9em;
+            font-size: 1.1em;
             font-weight: bold;
             color: #2f4f4f;
             margin-bottom: 6px;
@@ -209,7 +199,7 @@
 
         /* Antwort unten */
         .answer {
-            font-size: 1em;
+            font-size: 0.9em;
         }
 
         .controls {
@@ -262,14 +252,34 @@
         }
 
         .top-bar {
-            text-align: left;
-            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        /* 👉 Score rechts */
+        .score-container {
+            text-align: right;
+            position: relative;
+            padding-left: 20px;
+            /* 👉 Abstand zum Button */
+        }
+
+        .score-container div {
+            margin-bottom: 4px;
         }
 
         .total {
-            margin-top: 5px;
             font-weight: bold;
             color: #2e7d32;
+        }
+
+        .timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -285,6 +295,13 @@
 
         <div class="top-bar">
             <a href="index.html" class="back-button">⬅ Startseite</a>
+
+            <div class="score-container">
+                <div>Runde: <span id="round">1</span>/30</div>
+                <div>Punkte: <span id="score">100</span></div>
+                <div class="total">Gesamt: <span id="totalScore">0</span></div>
+                <div id="score-popup" class="score-popup"></div>
+            </div>
         </div>
 
         <h2>🕵️ Lehrer erraten</h2>
@@ -294,6 +311,8 @@
             <div class="score total">Gesamt: <span id="totalScore">0</span></div>
             <div id="score-popup" class="score-popup"></div>
         </div>
+
+        <div id="timer" class="timer"></div>
 
         <div class="cards" id="cards"></div>
 
@@ -349,6 +368,37 @@
             document.getElementById("solution").innerText = "";
 
             createCards();
+
+            startTimer();
+        }
+
+        function startTimer() {
+            let timeLeft = 5;
+            const timerEl = document.getElementById("timer");
+
+            timerEl.innerText = `Start in ${timeLeft}...`;
+
+            const interval = setInterval(() => {
+                timeLeft--;
+
+                if (timeLeft > 0) {
+                    timerEl.innerText = `Start in ${timeLeft}...`;
+                } else {
+                    clearInterval(interval);
+                    timerEl.innerText = "";
+
+                    revealFirstCard(); // 👉 danach erster Hinweis
+                }
+            }, 1000);
+        }
+
+        function revealFirstCard() {
+            const firstCard = document.querySelector(".card");
+
+            if (!firstCard) return;
+
+            firstCard.classList.add("flipped");
+            firstCard.dataset.flipped = "true";
         }
 
         /* 👉 Karten erzeugen */
@@ -375,12 +425,6 @@
                 card.addEventListener("click", () => flipCard(card));
 
                 container.appendChild(card);
-
-                /* 👉 ERSTER HINWEIS AUTOMATISCH */
-                if (index === 0) {
-                    card.classList.add("flipped");
-                    card.dataset.flipped = "true";
-                }
             });
         }
 

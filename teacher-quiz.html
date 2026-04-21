@@ -376,6 +376,48 @@
             color: #2e7d32;
             margin-top: 10px;
         }
+
+        .card {
+            position: relative;
+            /* 👉 wichtig für Positionierung */
+        }
+
+        /* 👉 -10 Popup */
+        .card-popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #d32f2f;
+
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 👉 Animation */
+        .card-popup.animate {
+            animation: floatUpCard 1.2s ease forwards;
+        }
+
+        @keyframes floatUpCard {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -70%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -90%);
+            }
+        }
     </style>
 </head>
 
@@ -565,16 +607,25 @@
 
             document.getElementById("score").innerText = score;
 
-            showScorePopup("-10");
+            showCardPopup(card, "-10"); // 👉 NEU
         }
 
-        /* 👉 Punkte-Animation */
-        function showScorePopup(text) {
-            const popup = document.getElementById("score-popup");
+        function showCardPopup(card, text) {
+            const popup = document.createElement("div");
+            popup.className = "card-popup";
             popup.innerText = text;
-            popup.classList.remove("animate");
-            void popup.offsetWidth;
-            popup.classList.add("animate");
+
+            card.appendChild(popup);
+
+            // Animation starten
+            requestAnimationFrame(() => {
+                popup.classList.add("animate");
+            });
+
+            // nach Animation entfernen
+            setTimeout(() => {
+                popup.remove();
+            }, 1200);
         }
 
         /* 👉 Lösung anzeigen */

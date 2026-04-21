@@ -141,13 +141,6 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        /*
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-*/
-
         .card:hover {
             transform: translateY(-6px);
 
@@ -196,14 +189,12 @@
             -webkit-backface-visibility: hidden;
         }
 
-        /* Vorderseite */
         .card-front {
             background: #8FAF9F;
             color: white;
             font-weight: bold;
         }
 
-        /* Rückseite */
         .card-back {
             background: #f3faf6;
             color: #333;
@@ -211,7 +202,6 @@
             transform: rotateY(180deg);
         }
 
-        /* Buttons */
         .controls {
             margin-top: 30px;
         }
@@ -232,7 +222,21 @@
             background: #6f9f8f;
         }
 
-        /* Lösung */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #8FAF9F;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .back-button:hover {
+            background: #6f9f8f;
+        }
+
         .solution {
             margin-top: 30px;
             font-size: 1.3em;
@@ -261,13 +265,14 @@
         <h2>🕵️ Lehrer erraten</h2>
 
         <div class="score-container">
-            <div class="score">Punkte: <span id="score">100</span></div>
+            <div class="score">Punkte: <span id="score">1000</span></div>
             <div id="score-popup" class="score-popup"></div>
         </div>
 
         <div class="cards" id="cards"></div>
 
         <div class="controls">
+            <a href="index.html" class="back-button">⬅ Zurück zur Startseite</a>
             <button onclick="showSolution()">Lösung anzeigen</button>
         </div>
 
@@ -280,8 +285,6 @@
     </footer>
 
     <script>
-
-        /* 👉 DEINE DATEN */
         const quizData = {
             name: "Max Mustermann",
             hints: [
@@ -292,9 +295,9 @@
             ]
         };
 
-        let score = 100;
+        let score = 1000;
+        let isFirst = true;
 
-        /* 👉 Karten beim Laden erstellen */
         function createCards() {
             const container = document.getElementById("cards");
 
@@ -314,6 +317,10 @@
                 card.addEventListener("click", () => flipCard(card));
 
                 container.appendChild(card);
+
+                if (index == 0) {
+                    flipCard(card);
+                }
             });
         }
 
@@ -324,17 +331,18 @@
             card.classList.add("flipped");
             card.dataset.flipped = "true";
 
-            score -= 10;
-            if (score < 0) score = 0;
+            if (!isFirst) score -= 100;
+            if (score <= 300) score = 300;
 
             document.getElementById("score").innerText = score;
 
             /* 👉 Punkte-Animation */
             const popup = document.getElementById("score-popup");
-            popup.innerText = "-10";
+            if (!isFirst) popup.innerText = "-100";
             popup.classList.remove("animate"); // reset
             void popup.offsetWidth; // Trick zum Neustarten der Animation
             popup.classList.add("animate");
+            isFirst = false;
         }
 
         /* 👉 Lösung anzeigen */

@@ -314,6 +314,49 @@
 
             z-index: 10;
         }
+
+        .round-intro {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #0d47a1;
+
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            border-radius: 14px;
+
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+            opacity: 0;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        /* 👉 Animation */
+        .round-intro.show {
+            animation: roundPop 1s ease forwards;
+        }
+
+        @keyframes roundPop {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+
+            40% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
     </style>
 </head>
 
@@ -340,6 +383,7 @@
         </div>
 
         <div class="cards-wrapper">
+            <div id="round-intro" class="round-intro"></div>
             <div id="timer" class="timer"></div>
             <div class="cards" id="cards"></div>
         </div>
@@ -379,6 +423,22 @@
             return array.sort(() => Math.random() - 0.5);
         }
 
+        function showRoundIntro(callback) {
+            const intro = document.getElementById("round-intro");
+
+            intro.innerText = `Runde ${round}`;
+            intro.classList.remove("show");
+
+            void intro.offsetWidth; // reset Animation
+
+            intro.classList.add("show");
+
+            setTimeout(() => {
+                intro.classList.remove("show");
+                if (callback) callback();
+            }, 1000);
+        }
+
         /* 👉 Lehrer laden */
         function loadNextTeacher() {
             if (remainingTeachers.length === 0 || round > 30) {
@@ -396,7 +456,10 @@
 
             createCards();
 
-            startTimer();
+            /* 👉 NEU: erst Animation, dann Timer */
+            showRoundIntro(() => {
+                startTimer();
+            });
         }
 
         function startTimer() {

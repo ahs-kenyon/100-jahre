@@ -250,6 +250,17 @@
             background-color: #C7DCD2;
             color: #2f4f4f;
         }
+
+        .top-bar {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .total {
+            margin-top: 5px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
     </style>
 </head>
 
@@ -262,18 +273,24 @@
 
     <div class="content-box">
 
+        <div class="top-bar">
+            <a href="index.html" class="back-button">⬅ Startseite</a>
+        </div>
+
         <h2>🕵️ Lehrer erraten</h2>
 
         <div class="score-container">
-            <div class="score">Punkte: <span id="score">1000</span></div>
+            <div class="score">Punkte (Runde): <span id="score">100</span></div>
+            <div class="score total">Gesamt: <span id="totalScore">0</span></div>
             <div id="score-popup" class="score-popup"></div>
         </div>
 
         <div class="cards" id="cards"></div>
 
         <div class="controls">
-            <a href="index.html" class="back-button">⬅ Zurück zur Startseite</a>
+            <div class="score">Runde: <span id="round">1</span>/30</div>
             <button onclick="showSolution()">Lösung anzeigen</button>
+            <button onclick="nextTeacher()">Nächster Lehrer</button>
         </div>
 
         <div class="solution" id="solution"></div>
@@ -285,24 +302,51 @@
     </footer>
 
     <script>
-        const quizData = {
-            name: "Max Mustermann",
-            hints: [
-                "Ich unterrichte Mathematik",
-                "Ich leite die Schach-AG",
-                "Ich bin seit über 10 Jahren an der Schule",
-                "Ich bin bekannt für schwierige Tests"
-            ]
-        };
+        let allTeachers = [];
 
-        let score = 1000;
-        let isFirst = true;
+        /* 👉 Spielstatus */
+        let remainingTeachers = [];
+        let currentTeacher = null;
 
+        let round = 1;
+        let score = 100;
+        let totalScore = 0;
+
+        /* 👉 Start */
+        function initGame() {
+            remainingTeachers = shuffle([...allTeachers]);
+            loadNextTeacher();
+        }
+
+        /* 👉 Zufällige Reihenfolge */
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        /* 👉 Lehrer laden */
+        function loadNextTeacher() {
+            if (remainingTeachers.length === 0 || round > 30) {
+                endGame();
+                return;
+            }
+
+            currentTeacher = remainingTeachers.pop();
+
+            score = 100;
+            document.getElementById("score").innerText = score;
+            document.getElementById("round").innerText = round;
+
+            document.getElementById("solution").innerText = "";
+
+            createCards();
+        }
+
+        /* 👉 Karten erzeugen */
         function createCards() {
             const container = document.getElementById("cards");
+            container.innerHTML = "";
 
-            quizData.hints.forEach((hint, index) => {
-
+            currentTeacher.hints.forEach((hint, index) => {
                 const card = document.createElement("div");
                 card.className = "card";
                 card.dataset.flipped = "false";
@@ -310,7 +354,11 @@
                 card.innerHTML = `
             <div class="card-inner">
                 <div class="card-front">Hinweis ${index + 1}</div>
-                <div class="card-back">${hint}</div>
+                <div class="card-back">
+                    <strong>${hint.question}</strong>
+                    <hr>
+                    ${hint.answer}
+                </div>
             </div>
         `;
 
@@ -318,8 +366,10 @@
 
                 container.appendChild(card);
 
-                if (index == 0) {
-                    flipCard(card);
+                /* 👉 ERSTER HINWEIS AUTOMATISCH */
+                if (index === 0) {
+                    card.classList.add("flipped");
+                    card.dataset.flipped = "true";
                 }
             });
         }
@@ -331,27 +381,93 @@
             card.classList.add("flipped");
             card.dataset.flipped = "true";
 
-            if (!isFirst) score -= 100;
-            if (score <= 300) score = 300;
+            score -= 10;
+            if (score < 0) score = 0;
 
             document.getElementById("score").innerText = score;
 
-            /* 👉 Punkte-Animation */
+            showScorePopup("-10");
+        }
+
+        /* 👉 Punkte-Animation */
+        function showScorePopup(text) {
             const popup = document.getElementById("score-popup");
-            if (!isFirst) popup.innerText = "-100";
-            popup.classList.remove("animate"); // reset
-            void popup.offsetWidth; // Trick zum Neustarten der Animation
+            popup.innerText = text;
+            popup.classList.remove("animate");
+            void popup.offsetWidth;
             popup.classList.add("animate");
-            isFirst = false;
         }
 
         /* 👉 Lösung anzeigen */
         function showSolution() {
-            document.getElementById("solution").innerText = "Lösung: " + quizData.name;
+            document.getElementById("solution").innerHTML = `
+        Lösung: <strong>${currentTeacher.name}</strong><br><br>
+        🏆 Rundenpunkte: ${score}
+    `;
         }
 
-        /* 👉 Start */
-        createCards();
+        /* 👉 Nächster Lehrer */
+        function nextTeacher() {
+            /* 👉 Punkte übernehmen */
+            totalScore += score;
+            document.getElementById("totalScore").innerText = totalScore;
+
+            round++;
+
+            loadNextTeacher();
+        }
+
+        /* 👉 Spielende */
+        function endGame() {
+            document.getElementById("cards").innerHTML = "";
+
+            document.getElementById("solution").innerHTML = `
+        🎉 Spiel beendet!<br><br>
+        Gesamtpunktzahl: <strong>${totalScore}</strong>
+    `;
+        }
+
+        async function loadCSV() {
+            const response = await fetch("teacher-answers.csv");
+            const text = await response.text();
+
+            const rows = text.split("\n").map(r => r.split(";"));
+
+            const headers = rows[0].map(h => h.trim());
+
+            allTeachers = rows.slice(1)
+                .map(row => {
+                    const lastname = row[0]?.trim();
+                    const firstname = row[1]?.trim();
+
+                    if (!lastname || !firstname) return null;
+
+                    let hints = [];
+
+                    for (let i = 2; i < headers.length; i++) {
+                        const answer = row[i]?.trim();
+
+                        if (answer && answer !== "") {
+                            hints.push({
+                                question: headers[i],
+                                answer: answer
+                            });
+                        }
+                    }
+
+                    if (hints.length === 0) return null;
+
+                    return {
+                        name: `${firstname} ${lastname}`,
+                        hints: hints
+                    };
+                })
+                .filter(t => t !== null);
+
+            initGame();
+        }
+
+        loadCSV();
 
     </script>
 

@@ -106,6 +106,11 @@
             margin: 0 auto;
         }
 
+        .cards-wrapper {
+            position: relative;
+            margin-top: 30px;
+        }
+
         .card {
             width: 100%;
             height: 90px;
@@ -185,6 +190,17 @@
             opacity: 1;
         }
 
+        .cards.locked .card {
+            opacity: 0.4;
+            filter: grayscale(80%);
+            pointer-events: none;
+            /* 👉 verhindert Klicks */
+        }
+
+        /* optional: etwas weicher */
+        .cards.locked .card-front {
+            background: #b0b0b0;
+        }
 
         /* Frage oben */
         .question {
@@ -281,10 +297,22 @@
         }
 
         .timer {
-            font-size: 2em;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            font-size: 2.2em;
             font-weight: bold;
             color: #0d47a1;
-            margin-bottom: 20px;
+
+            background: rgba(255, 255, 255, 0.85);
+            padding: 10px 20px;
+            border-radius: 12px;
+
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+            z-index: 10;
         }
     </style>
 </head>
@@ -311,9 +339,10 @@
             </div>
         </div>
 
-        <div id="timer" class="timer"></div>
-
-        <div class="cards" id="cards"></div>
+        <div class="cards-wrapper">
+            <div id="timer" class="timer"></div>
+            <div class="cards" id="cards"></div>
+        </div>
 
         <div class="controls">
             <button onclick="showSolution()">Lösung anzeigen</button>
@@ -374,35 +403,45 @@
             let timeLeft = 5;
             const timerEl = document.getElementById("timer");
 
-            timerEl.innerText = `Start in ${timeLeft}...`;
+            timerEl.innerText = timeLeft;
 
             const interval = setInterval(() => {
                 timeLeft--;
 
                 if (timeLeft > 0) {
-                    timerEl.innerText = `Start in ${timeLeft}...`;
+                    timerEl.innerText = timeLeft;
                 } else {
                     clearInterval(interval);
-                    timerEl.innerText = "";
 
-                    revealFirstCard(); // 👉 danach erster Hinweis
+                    timerEl.innerText = "LOS!";
+
+                    setTimeout(() => {
+                        timerEl.innerText = "";
+                    }, 600);
+
+                    revealFirstCard();
                 }
             }, 1000);
         }
 
         function revealFirstCard() {
+            const container = document.getElementById("cards");
             const firstCard = document.querySelector(".card");
 
-            if (!firstCard) return;
+            if (firstCard) {
+                firstCard.classList.add("flipped");
+                firstCard.dataset.flipped = "true";
+            }
 
-            firstCard.classList.add("flipped");
-            firstCard.dataset.flipped = "true";
+            container.classList.remove("locked"); // 👉 freigeben
         }
 
         /* 👉 Karten erzeugen */
         function createCards() {
             const container = document.getElementById("cards");
             container.innerHTML = "";
+
+            container.classList.add("locked"); // 👉 sperren
 
             currentTeacher.hints.forEach((hint, index) => {
                 const card = document.createElement("div");
@@ -413,10 +452,10 @@
             <div class="card-inner">
                 <div class="card-front">Hinweis ${index + 1}</div>
                 <div class="card-back">
-    <div class="question">${hint.question}</div>
-    <div class="divider"></div>
-    <div class="answer">${hint.answer}</div>
-</div>
+                    <div class="question">${hint.question}</div>
+                    <div class="divider"></div>
+                    <div class="answer">${hint.answer}</div>
+                </div>
             </div>
         `;
 

@@ -358,6 +358,24 @@
                 transform: translate(-50%, -50%) scale(1);
             }
         }
+
+        .end-screen {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .final-score {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        .final-score span {
+            display: block;
+            font-size: 3em;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -371,9 +389,9 @@
     <div class="content-box">
 
         <div class="top-bar">
-            <a href="index.html" class="back-button">⬅ Startseite</a>
+            <a href="togo-page-01.html" class="back-button">⬅ Übersicht</a>
 
-            <h2>🕵️ Lehrer erraten</h2>
+            <h2>🕵️ 30 Lehrer*innen - 30 Fakten</h2>
 
             <div class="score-container">
                 <div class="score total">Gesamt: <span id="totalScore">0</span></div>
@@ -387,6 +405,16 @@
             <div id="round-intro" class="round-intro"></div>
             <div id="timer" class="timer"></div>
             <div class="cards" id="cards"></div>
+        </div>
+
+        <div id="end-screen" class="end-screen" style="display: none;">
+            <h2>🎉 Spiel beendet!</h2>
+            <div class="final-score">
+                Gesamtpunktzahl<br>
+                <span id="finalScore">0</span>
+            </div>
+
+            <button onclick="restartGame()">Neues Spiel starten</button>
         </div>
 
         <div class="controls">
@@ -438,7 +466,7 @@
 
         /* 👉 Lehrer laden */
         function loadNextTeacher() {
-            if (remainingTeachers.length === 0 || round > 30) {
+            if (remainingTeachers.length === 0 || round > 3) {
                 endGame();
                 return;
             }
@@ -570,12 +598,16 @@
 
         /* 👉 Spielende */
         function endGame() {
+            /* 👉 Spiel-Elemente ausblenden */
             document.getElementById("cards").innerHTML = "";
+            document.querySelector(".controls").style.display = "none";
+            document.querySelector(".score-container").style.display = "none";
 
-            document.getElementById("solution").innerHTML = `
-        🎉 Spiel beendet!<br><br>
-        Gesamtpunktzahl: <strong>${totalScore}</strong>
-    `;
+            document.getElementById("solution").innerHTML = "";
+
+            /* 👉 Endscreen anzeigen */
+            document.getElementById("finalScore").innerText = totalScore;
+            document.getElementById("end-screen").style.display = "block";
         }
 
         async function loadCSV() {

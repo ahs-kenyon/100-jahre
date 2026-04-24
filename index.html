@@ -28,7 +28,6 @@
             align-items: center;
             padding: 15px 30px;
             background-color: #C7DCD2;
-            animation: fadeIn 1s ease-in;
         }
 
         header img {
@@ -43,7 +42,7 @@
         }
 
         .intro {
-            margin: 40px auto;
+            margin: 40px auto 25px auto;
             max-width: 800px;
             padding: 0 20px;
         }
@@ -58,28 +57,49 @@
             line-height: 1.6;
         }
 
+        .button-section {
+            max-width: 940px;
+            margin: 0 auto 45px auto;
+            padding: 24px 20px;
+
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px solid #8FAF9F;
+            border-radius: 22px;
+            backdrop-filter: blur(4px);
+        }
+
+        .button-section+.button-section {
+            margin-top: 30px;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 0 20px;
+            gap: 12px;
         }
 
         .button {
             background: #f3faf6;
             border: 2px solid #8FAF9F;
-            color: #0d47a1;
-            padding: 30px 15px;
+            color: white;
+            /*rgba(164, 194, 244, 0.9);*/
+            padding: 70px 10px;
             border-radius: 14px;
             text-decoration: none;
+            text-shadow:
+                -1px -1px 0 black,
+                1px -1px 0 black,
+                -1px 1px 0 black,
+                1px 1px 0 black;
             font-weight: bold;
             font-size: 1.1em;
+
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 10px;
+
             transition: transform 0.25s, box-shadow 0.25s, background 0.25s, border 0.25s;
         }
 
@@ -102,28 +122,6 @@
             color: #2f4f4f;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @media (max-width: 700px) {
             .grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -141,8 +139,51 @@
             }
 
             header img {
+                margin-right: 0;
                 margin-bottom: 10px;
             }
+        }
+
+        #cmd-togo-01 {
+            background-image: url("Graphics/bg-togo-01.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #cmd-togo-02 {
+            background-image: url("Graphics/bg-togo-02.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #cmd-togo-03 {
+            background-image: url("Graphics/bg-togo-03.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #cmd-togo-04 {
+            background-image: url("Graphics/bg-togo-04.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #cmd-togo-05 {
+            background-image: url("Graphics/bg-togo-05.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #cmd-togo-06 {
+            background-image: url("Graphics/bg-togo-06.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #cmd-togo-07 {
+            background-image: url("Graphics/bg-togo-07.jpg");
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
@@ -161,20 +202,51 @@
             Gemeinschaft und gelebter Schultradition.
         </p>
         <p>
-            Wählen Sie eine Station aus und starten Sie direkt mit einem Spiel oder Quiz!
+            Wähle eine Station aus und starte direkt mit einem Spiel oder Quiz!
         </p>
     </section>
 
-    <section class="grid">
-        <a href="togo-page-01.html" class="button"><span>❓</span>QUIZ<br>30 Lehrer*innen – 30 Fakten</a>
-        <a href="#" class="button"><span>📚</span>KAHOOT<br>Kenyon in Zahlen und Fakten (FOLGT!)</a>
+    <!-- OBERER BEREICH: 2 neue Buttons -->
+    <section class="button-section">
+        <div class="grid">
+            <a href="#" class="button">PROGRAMM</a>
+            <a href="#" class="button">ZEITKAPSEL</a>
+        </div>
+    </section>
 
-        <a href="#" class="button"><span>🎲</span>ANALOG & DIGITAL<br>Kenyon-Activity (FOLGT!)</a>
-        <a href="#" class="button"><span>🏫</span>ANALOG & DIGITAL<br>Stirnraten (FOLGT!)</a>
-        <a href="#" class="button"><span>🕵️</span>ANALOG<br>Schulhaus-Schnitzeljagd (FOLGT!)</a>
+    <!-- UNTERER BEREICH: bestehende 7 Buttons -->
+    <section class="button-section">
+        <div class="grid">
 
-        <a href="togo-page-06.html" class="button"><span>🧩</span>ANALOG<br>Kenyon-Memory</a>
-        <a href="togo-page-07.html" class="button"><span>❓</span>ANALOG<br>Kurrentschrift-Quiz</a>
+            <a href="togo-page-01.html" class="button" id="cmd-togo-01">
+                30 LEHRER*INNEN - 30 FAKTEN
+            </a>
+
+            <a href="togo-page-02.html" class="button" id="cmd-togo-02">
+                KENYON IN ZAHLEN & FAKTEN
+            </a>
+
+            <a href="togo-page-03.html" class="button" id="cmd-togo-03">
+                KENYON-ACTIVITY
+            </a>
+
+            <a href="togo-page-04.html" class="button" id="cmd-togo-04">
+                STIRNRATEN
+            </a>
+
+            <a href="#" class="button" id="cmd-togo-05">
+                SCHULHAUS-SCHNITZELJAGD
+            </a>
+
+            <a href="togo-page-06.html" class="button" id="cmd-togo-06">
+                KENYON-MEMORY
+            </a>
+
+            <a href="togo-page-07.html" class="button" id="cmd-togo-07">
+                KURRENTSCHRIFT-QUIZ
+            </a>
+
+        </div>
     </section>
 
     <footer>

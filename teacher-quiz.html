@@ -72,28 +72,34 @@
         .score-popup {
             position: absolute;
             left: 50%;
+            top: 10px;
             transform: translateX(-50%);
-            top: 0;
-            font-size: 1.2em;
+
+            font-size: 1.8em;
             font-weight: bold;
-            color: #d32f2f;
+
             opacity: 0;
             pointer-events: none;
         }
 
         .score-popup.animate {
-            animation: floatUp 0.8s ease forwards;
+            animation: popupFloat 1.4s ease forwards;
         }
 
-        @keyframes floatUp {
+        @keyframes popupFloat {
             0% {
+                opacity: 0;
+                transform: translate(-50%, 10px) scale(0.8);
+            }
+
+            20% {
                 opacity: 1;
-                transform: translate(-50%, 0);
+                transform: translate(-50%, 0px) scale(1.15);
             }
 
             100% {
                 opacity: 0;
-                transform: translate(-50%, -25px);
+                transform: translate(-50%, -35px) scale(1);
             }
         }
 
@@ -488,8 +494,23 @@
         </div>
 
         <div class="controls">
-            <button onclick="showSolution()">Lösung anzeigen</button>
-            <button onclick="nextTeacher()">Nächste Person</button>
+
+            <button id="solveBtn" onclick="showSolution()">
+                Lösung anzeigen
+            </button>
+
+            <button id="correctBtn" onclick="answerCorrect()" style="display:none;">
+                ✅ Richtig geraten?
+            </button>
+
+            <button id="wrongBtn" onclick="answerWrong()" style="display:none;">
+                ❌ Falsch geraten?
+            </button>
+
+            <button id="nextBtn" onclick="nextTeacher()" style="display:none;">
+                Nächster Lehrer
+            </button>
+
         </div>
 
         <div class="solution" id="solution"></div>
@@ -659,10 +680,57 @@
 
         /* 👉 Lösung anzeigen */
         function showSolution() {
-            document.getElementById("solution").innerHTML = `
-        Lösung: <strong>${currentTeacher.name}</strong><br><br>
-        🏆 Rundenpunkte: ${score}
-    `;
+
+            document.getElementById("solution").innerHTML =
+                `Lösung: <strong>${currentTeacher.name}</strong>`;
+
+            document.getElementById("solveBtn").style.display = "none";
+
+            document.getElementById("correctBtn").style.display = "inline-block";
+            document.getElementById("wrongBtn").style.display = "inline-block";
+        }
+
+        function answerCorrect() {
+
+            score += 100;
+
+            showScorePopup("+100", "#2e7d32");
+
+            finishRound();
+        }
+
+        function answerWrong() {
+
+            score -= 50;
+
+            if (score < 0) score = 0;
+
+            showScorePopup("-50", "#d32f2f");
+
+            finishRound();
+        }
+
+        function showScorePopup(text, color) {
+
+            const popup = document.getElementById("score-popup");
+
+            popup.innerText = text;
+            popup.style.color = color;
+
+            popup.classList.remove("animate");
+            void popup.offsetWidth;
+            popup.classList.add("animate");
+        }
+
+        function finishRound() {
+
+            document.getElementById("solution").innerHTML +=
+                `<br><br>🏆 Rundenpunkte: ${score}`;
+
+            document.getElementById("correctBtn").style.display = "none";
+            document.getElementById("wrongBtn").style.display = "none";
+
+            document.getElementById("nextBtn").style.display = "inline-block";
         }
 
         /* 👉 Nächster Lehrer */
@@ -670,6 +738,10 @@
             /* 👉 Punkte übernehmen */
             totalScore += score;
             document.getElementById("totalScore").innerText = totalScore;
+            document.getElementById("solveBtn").style.display = "inline-block";
+            document.getElementById("correctBtn").style.display = "none";
+            document.getElementById("wrongBtn").style.display = "none";
+            document.getElementById("nextBtn").style.display = "none";
 
             round++;
 

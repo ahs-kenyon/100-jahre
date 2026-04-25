@@ -274,6 +274,56 @@
             font-size: 1.3em;
             font-weight: bold;
             color: #0d47a1;
+
+            position: relative;
+            min-height: 60px;
+        }
+
+        .solution-popup {
+            position: absolute;
+            left: 50%;
+            top: -10px;
+            transform: translateX(-50%);
+
+            font-size: 2em;
+            font-weight: bold;
+
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .solution-popup {
+            position: absolute;
+            left: 50%;
+            top: -10px;
+            transform: translateX(-50%);
+
+            font-size: 2em;
+            font-weight: bold;
+
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .solution-popup.animate {
+            animation: solutionFloat 1.6s ease forwards;
+        }
+
+        @keyframes solutionFloat {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 10px) scale(0.8);
+            }
+
+            20% {
+                opacity: 1;
+                transform: translate(-50%, 0px) scale(1.15);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -35px) scale(1);
+            }
         }
 
         footer {
@@ -692,35 +742,40 @@
         }
 
         function answerCorrect() {
-
             score += 100;
 
-            showScorePopup("+100", "#2e7d32");
+            showSolutionPopup("+100", "#2e7d32");
 
             finishRound();
         }
 
         function answerWrong() {
-
-            score -= 50;
-
+            score -= 100;
             if (score < 0) score = 0;
 
-            showScorePopup("-50", "#d32f2f");
+            showSolutionPopup("-100", "#d32f2f");
 
             finishRound();
         }
 
-        function showScorePopup(text, color) {
+        function showSolutionPopup(text, color) {
 
-            const popup = document.getElementById("score-popup");
+            const solution = document.getElementById("solution");
 
+            const popup = document.createElement("div");
+            popup.className = "solution-popup";
             popup.innerText = text;
             popup.style.color = color;
 
-            popup.classList.remove("animate");
-            void popup.offsetWidth;
-            popup.classList.add("animate");
+            solution.appendChild(popup);
+
+            requestAnimationFrame(() => {
+                popup.classList.add("animate");
+            });
+
+            setTimeout(() => {
+                popup.remove();
+            }, 1600);
         }
 
         function finishRound() {

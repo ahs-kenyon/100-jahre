@@ -571,6 +571,10 @@
 
     <script>
         let allTeachers = [];
+        let selectedClass = "";
+
+        const params = new URLSearchParams(window.location.search);
+        selectedClass = params.get("klasse") || "";
 
         /* 👉 Spielstatus */
         let remainingTeachers = [];
@@ -582,7 +586,27 @@
 
         /* 👉 Start */
         function initGame() {
-            remainingTeachers = shuffle([...allTeachers]);
+
+            let matchingTeachers = allTeachers.filter(t =>
+                t.classes.includes(selectedClass)
+            );
+
+            let otherTeachers = allTeachers.filter(t =>
+                !t.classes.includes(selectedClass)
+            );
+
+            matchingTeachers = shuffle(matchingTeachers);
+            otherTeachers = shuffle(otherTeachers);
+
+            let finalList = [...matchingTeachers];
+
+            if (finalList.length < 10) {
+                const needed = 10 - finalList.length;
+                finalList.push(...otherTeachers.slice(0, needed));
+            }
+
+            remainingTeachers = shuffle(finalList).slice(0, 10);
+
             loadNextTeacher();
         }
 
@@ -829,14 +853,21 @@
 
             allTeachers = rows.slice(1)
                 .map(row => {
+
                     const lastname = row[0]?.trim();
                     const firstname = row[1]?.trim();
+                    const classesRaw = row[2]?.trim();
 
                     if (!lastname || !firstname) return null;
 
+                    const classes = classesRaw
+                        ? classesRaw.split("-").map(c => c.trim().toLowerCase())
+                        : [];
+
                     let hints = [];
 
-                    for (let i = 2; i < headers.length; i++) {
+                    for (let i = 3; i < headers.length; i++) {
+
                         const answer = row[i]?.trim();
 
                         if (answer && answer !== "") {
@@ -851,7 +882,8 @@
 
                     return {
                         name: `${firstname} ${lastname}`,
-                        hints: hints
+                        classes: classes,
+                        hints: shuffle(hints)
                     };
                 })
                 .filter(t => t !== null);

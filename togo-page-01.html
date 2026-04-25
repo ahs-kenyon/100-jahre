@@ -174,7 +174,8 @@
             <li><strong>Gesucht</strong> wird <strong>eine Lehrerin oder ein Lehrer</strong> der AHS. Ein Hinweis wird
                 sofort aufgedeckt.</li>
             <li>Die Lehrkraft kann dann <strong>weitere Hinweise</strong> aufdecken lassen.</li>
-            <li>Ein zusätzlicher Hinweis <strong>kostet aber 100 Punkte</strong> - je weniger die Klasse braucht, desto mehr
+            <li>Ein zusätzlicher Hinweis <strong>kostet aber 100 Punkte</strong> - je weniger die Klasse braucht, desto
+                mehr
                 Punkte gibt es pro Runde also!</li>
             <li>Wenn die <strong>Gruppe ihre Antwort gegeben</strong> hat, kann die <strong>Lösung aufgedeckt</strong>
                 werden.</li> Habt ihr richtig geraten, gibt's 100 Bonuspunkte, liegt ihr falsch, 100 Punkte Abzug!
@@ -184,7 +185,64 @@
         </ol>
 
         <h3>🎮 Online-Spiel</h3>
-        <a href="teacher-quiz.html" class="menu-button">Spiel starten</a>
+        <h3>🎮 Online-Spiel</h3>
+
+        <div style="margin-top:20px; margin-bottom:20px;">
+            <select id="classSelect" style="
+        padding:12px;
+        font-size:1em;
+        border-radius:8px;
+        border:1px solid #ccc;
+        width:220px;
+        max-width:100%;
+    ">
+                <option value="">Klasse wählen</option>
+                <option>1a</option>
+                <option>1b</option>
+                <option>1c</option>
+                <option>1d</option>
+                <option>1e</option>
+                <option>2a</option>
+                <option>2b</option>
+                <option>2c</option>
+                <option>2d</option>
+                <option>3a</option>
+                <option>3b</option>
+                <option>3c</option>
+                <option>3d</option>
+                <option>4a</option>
+                <option>4b</option>
+                <option>4c</option>
+                <option>5a</option>
+                <option>5b</option>
+                <option>5c</option>
+                <option>6a</option>
+                <option>6b</option>
+                <option>6c</option>
+                <option>7a</option>
+                <option>7b</option>
+                <option>7c</option>
+                <option>8a</option>
+                <option>8b</option>
+            </select>
+        </div>
+
+        <button onclick="startGame()" class="menu-button" style="border:none;">
+            Spiel starten
+        </button>
+
+        <script>
+            function startGame() {
+                const klasse = document.getElementById("classSelect").value;
+
+                if (!klasse) {
+                    alert("Bitte zuerst eine Klasse auswählen.");
+                    return;
+                }
+
+                window.location.href = "teacher-quiz.html?klasse=" + encodeURIComponent(klasse);
+            }
+        </script>
     </div>
 
     <footer>

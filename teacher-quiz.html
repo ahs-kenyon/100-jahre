@@ -489,7 +489,7 @@
 
         <div class="controls">
             <button onclick="showSolution()">Lösung anzeigen</button>
-            <button onclick="nextTeacher()">Nächster Lehrer</button>
+            <button onclick="nextTeacher()">Nächste Person</button>
         </div>
 
         <div class="solution" id="solution"></div>
@@ -504,7 +504,7 @@
         let currentTeacher = null;
 
         let round = 1;
-        let score = 100;
+        let score = 1000;
         let totalScore = 0;
 
         /* 👉 Start */
@@ -543,7 +543,7 @@
 
             currentTeacher = remainingTeachers.pop();
 
-            score = 100;
+            score = 1000;
             //document.getElementById("score").innerText = score;
             document.getElementById("round").innerText = round;
 
@@ -553,7 +553,7 @@
 
             /* 👉 NEU: erst Animation, dann Timer */
             showRoundIntro(() => {
-                startTimer();
+                //startTimer();
             });
         }
 
@@ -630,12 +630,12 @@
             card.classList.add("flipped");
             card.dataset.flipped = "true";
 
-            score -= 10;
+            score -= 100;
             if (score < 0) score = 0;
 
             //document.getElementById("score").innerText = score;
 
-            showCardPopup(card, "-10"); // 👉 NEU
+            //showCardPopup(card, "-10"); // 👉 NEU
         }
 
         function showCardPopup(card, text) {

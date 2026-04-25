@@ -457,11 +457,11 @@
         <div class="top-bar">
             <a href="togo-page-01.html" class="back-button">⬅ Übersicht</a>
 
-            <h2>🕵️ 30 Lehrer*innen - 30 Fakten</h2>
+            <h2>🕵️ 10 Lehrer*innen - 10 Fakten</h2>
 
             <div class="score-container">
                 <div class="score total">Gesamt: <span id="totalScore">0</span></div>
-                <div class="round">Runde: <span id="round">1</span>/0</div>
+                <div class="round">Runde: <span id="round">1</span>/10</div>
                 <div id="score-popup" class="score-popup"></div>
             </div>
         </div>
@@ -539,7 +539,7 @@
             currentTeacher = remainingTeachers.pop();
 
             score = 100;
-            document.getElementById("score").innerText = score;
+            //document.getElementById("score").innerText = score;
             document.getElementById("round").innerText = round;
 
             document.getElementById("solution").innerText = "";
@@ -628,7 +628,7 @@
             score -= 10;
             if (score < 0) score = 0;
 
-            document.getElementById("score").innerText = score;
+            //document.getElementById("score").innerText = score;
 
             showCardPopup(card, "-10"); // 👉 NEU
         }

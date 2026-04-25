@@ -154,7 +154,8 @@
 
         /* 👉 Vorderseite */
         .card-front {
-            background: #8FAF9F;
+            /*background: #8FAF9F;*/
+            background-image: url("Graphics/bg-hint.png");
             color: white;
             font-weight: bold;
 
@@ -461,8 +462,7 @@
 
             <div class="score-container">
                 <div class="score total">Gesamt: <span id="totalScore">0</span></div>
-                <div class="score">Punkte: <span id="score">100</span></div>
-                <div class="round">Runde: <span id="round">1</span>/30</div>
+                <div class="round">Runde: <span id="round">1</span>/0</div>
                 <div id="score-popup" class="score-popup"></div>
             </div>
         </div>
@@ -554,7 +554,7 @@
         }
 
         function startTimer() {
-            let timeLeft = 5;
+            let timeLeft = 3;
             const timerEl = document.getElementById("timer");
 
             timerEl.innerText = timeLeft;

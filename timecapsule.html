@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeitkapsel – AHS Kenyongasse</title>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+
+            background:
+                linear-gradient(135deg, rgba(111, 168, 220, 0.9), rgba(164, 194, 244, 0.9)),
+                url("https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp");
+
+            background-size: cover, 60%;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #C7DCD2;
+            flex-shrink: 0;
+        }
+
+        header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin: 0;
+            color: #2f4f4f;
+        }
+
+        .central-image {
+            flex: 1;
+
+            background-image: url("Anleitungen/Anleitung-Zeitkapseln.png");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            padding: 20px;
+            font-size: 0.9em;
+            background-color: #C7DCD2;
+            color: #2f4f4f;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp" alt="AHS Kenyongasse Logo">
+        <h1>100 Jahre AHS Kenyongasse</h1>
+    </header>
+
+    <div class="central-image">
+        <!-- Bild wird per CSS geladen -->
+    </div>
+
+    <footer>
+        © AHS Kenyongasse
+    </footer>
+
+</body>
+
+</html>

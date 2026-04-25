@@ -23,6 +23,7 @@
             background-attachment: fixed;
         }
 
+        /* HEADER */
         header {
             display: flex;
             align-items: center;
@@ -41,6 +42,7 @@
             color: #2f4f4f;
         }
 
+        /* INTRO */
         .intro {
             margin: 40px auto 25px auto;
             max-width: 800px;
@@ -57,12 +59,13 @@
             line-height: 1.6;
         }
 
+        /* SECTION BOXEN */
         .button-section {
             max-width: 940px;
             margin: 0 auto 45px auto;
             padding: 24px 20px;
 
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.5);
             border: 2px solid #8FAF9F;
             border-radius: 22px;
             backdrop-filter: blur(4px);
@@ -72,48 +75,92 @@
             margin-top: 30px;
         }
 
+        /* SECTION ÜBERSCHRIFTEN */
+        .section-title {
+            margin: 0 0 20px 0;
+            color: #2f4f4f;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* GRIDS */
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
         }
 
+        /* obere zwei Buttons: gleiche Breite wie normale Buttons */
+        .grid-upper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* nur zwei Spalten */
+            gap: 12px;
+
+            width: calc((100% - 24px) * 2 / 3);
+            /* entspricht Breite von 2 Buttons im 3er-Grid */
+            margin: 0 auto;
+            /* zentriert die ganze Reihe */
+        }
+
+        /* leere mittlere Spalte für Zentrierung */
+        .grid-upper .spacer {
+            visibility: hidden;
+        }
+
+        /* BUTTONS */
         .button {
-            background: #f3faf6;
-            border: 2px solid #8FAF9F;
-            color: white;
-            /*rgba(164, 194, 244, 0.9);*/
-            padding: 70px 10px;
+            position: relative;
+            overflow: hidden;
+
+            min-height: 190px;
             border-radius: 14px;
+            border: 2px solid #8FAF9F;
+
+            color: white;
             text-decoration: none;
-            text-shadow:
-                -1px -1px 0 black,
-                1px -1px 0 black,
-                -1px 1px 0 black,
-                1px 1px 0 black;
             font-weight: bold;
             font-size: 1.1em;
 
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-            gap: 10px;
 
-            transition: transform 0.25s, box-shadow 0.25s, background 0.25s, border 0.25s;
+            background-size: cover;
+            background-position: center;
+
+            transition: transform 0.25s, box-shadow 0.25s;
         }
 
-        .button span {
-            font-size: 1.8em;
+        /* Textstreifen unten */
+        .button::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 56px;
+            background: rgba(143, 175, 159, 0.95);
+            z-index: 1;
         }
 
+        /* Text über dem Streifen */
+        .button span,
+        .button .label {
+            position: relative;
+            z-index: 2;
+            padding: 0 10px 14px 10px;
+            line-height: 1.25;
+            text-shadow: none;
+        }
+
+        /* Hover */
         .button:hover {
             transform: translateY(-8px) scale(1.03);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-            background: #e6f3ec;
-            border-color: #6f9f8f;
         }
 
+        /* FOOTER */
         footer {
             margin-top: 50px;
             padding: 20px;
@@ -122,14 +169,23 @@
             color: #2f4f4f;
         }
 
+        /* RESPONSIVE */
         @media (max-width: 700px) {
-            .grid {
+
+            .grid,
+            .grid-upper {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-upper .spacer {
+                display: none;
             }
         }
 
         @media (max-width: 500px) {
-            .grid {
+
+            .grid,
+            .grid-upper {
                 grid-template-columns: 1fr;
             }
 
@@ -144,58 +200,71 @@
             }
         }
 
+        /* BACKGROUNDS */
+        #cmd-programm {
+            background-image: url("Graphics/bg-programm.jpg");
+        }
+
+        #cmd-timecapsule {
+            background-image: url("Graphics/bg-timecapsule.jpg");
+        }
+
         #cmd-togo-01 {
             background-image: url("Graphics/bg-togo-01.jpg");
-            background-size: cover;
-            background-position: center;
         }
 
         #cmd-togo-02 {
             background-image: url("Graphics/bg-togo-02.jpg");
-            background-size: cover;
-            background-position: center;
         }
 
         #cmd-togo-03 {
             background-image: url("Graphics/bg-togo-03.jpg");
-            background-size: cover;
-            background-position: center;
         }
 
         #cmd-togo-04 {
             background-image: url("Graphics/bg-togo-04.jpg");
-            background-size: cover;
-            background-position: center;
         }
 
         #cmd-togo-05 {
             background-image: url("Graphics/bg-togo-05.jpg");
-            background-size: cover;
-            background-position: center;
         }
 
         #cmd-togo-06 {
             background-image: url("Graphics/bg-togo-06.jpg");
-            background-size: cover;
-            background-position: center;
         }
 
         #cmd-togo-07 {
             background-image: url("Graphics/bg-togo-07.jpg");
-            background-size: cover;
-            background-position: center;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .headline-underlined {
+            border-bottom: #2f4f4f solid 1px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
 
-    <header>
+    <header class="fade-in">
         <img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp" alt="AHS Kenyongasse Logo">
         <h1>100 Jahre AHS Kenyongasse</h1>
     </header>
 
-    <section class="intro">
+    <section class="intro fade-in">
         <h2>Willkommen zum Jubiläumsfest!</h2>
         <p>
             Die AHS Kenyongasse feiert ihr 100-jähriges Bestehen – ein Jahrhundert voller Bildung,
@@ -206,50 +275,65 @@
         </p>
     </section>
 
-    <!-- OBERER BEREICH: 2 neue Buttons -->
-    <section class="button-section">
-        <div class="grid">
-            <a href="#" class="button">PROGRAMM</a>
-            <a href="#" class="button">ZEITKAPSEL</a>
+    <!-- OBERER BLOCK -->
+    <section class="button-section fade-in">
+        <div class="headline-underlined">
+            <h3 class="section-title">ALLGEMEINE INFORMATIONEN</h3>
+        </div>
+
+        <div class="grid-upper">
+            <a href="programm.html" class="button" id="cmd-programm">
+                <span class="label">PROGRAMM</span>
+            </a>
+
+            <a href="timecapsule.html" class="button" id="cmd-timecapsule" target="_blank">
+                <span class="label">ZEITKAPSEL</span>
+            </a>
+
+            <div class="spacer"></div>
         </div>
     </section>
 
-    <!-- UNTERER BEREICH: bestehende 7 Buttons -->
-    <section class="button-section">
+    <!-- UNTERER BLOCK -->
+    <section class="button-section fade-in">
+        <div class="headline-underlined">
+            <h3 class="section-title">TO-GO-SPIELE</h3>
+        </div>
+
         <div class="grid">
 
             <a href="togo-page-01.html" class="button" id="cmd-togo-01">
-                30 LEHRER*INNEN - 30 FAKTEN
+                <span class="label">30 LEHRER*INNEN - 30 FAKTEN</span>
             </a>
 
             <a href="togo-page-02.html" class="button" id="cmd-togo-02">
-                KENYON IN ZAHLEN & FAKTEN
+                <span class="label">KENYON IN ZAHLEN & FAKTEN</span>
             </a>
 
             <a href="togo-page-03.html" class="button" id="cmd-togo-03">
-                KENYON-ACTIVITY
+                <span class="label">KENYON-ACTIVITY</span>
             </a>
 
             <a href="togo-page-04.html" class="button" id="cmd-togo-04">
-                STIRNRATEN
+                <span class="label">STIRNRATEN</span>
             </a>
 
             <a href="#" class="button" id="cmd-togo-05">
-                SCHULHAUS-SCHNITZELJAGD
+                <span class="label">SCHULHAUS-SCHNITZELJAGD</span>
             </a>
 
             <a href="togo-page-06.html" class="button" id="cmd-togo-06">
-                KENYON-MEMORY
+                <span class="label">KENYON-MEMORY</span>
             </a>
 
             <a href="togo-page-07.html" class="button" id="cmd-togo-07">
-                KURRENTSCHRIFT-QUIZ
+                <span class="label">KURRENTSCHRIFT-QUIZ</span>
             </a>
 
         </div>
     </section>
 
-    <footer>
+    <footer class="fade-in">
         © AHS Kenyongasse
     </footer>
 

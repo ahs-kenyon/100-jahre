@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programm – AHS Kenyongasse</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+
+            background:
+                linear-gradient(135deg, rgba(111, 168, 220, 0.9), rgba(164, 194, 244, 0.9)),
+                url("https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp");
+
+            background-size: cover, 60%;
+            background-position: center, center;
+            background-repeat: no-repeat, no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #C7DCD2;
+        }
+
+        header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            margin: 0;
+            color: #2f4f4f;
+        }
+
+        .content-box {
+            background: white;
+            color: #333;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .content-box h2 {
+            margin-top: 0;
+            color: #0d47a1;
+        }
+
+        .content-box h3 {
+            margin-top: 30px;
+            color: #2f4f4f;
+        }
+
+        .content-box p {
+            line-height: 1.6;
+        }
+
+        .steps {
+            padding-left: 20px;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #8FAF9F;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .back-button:hover {
+            background: #6f9f8f;
+        }
+
+        .menu-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #8FAF9F;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .menu-button:hover {
+            background: #6f9f8f;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.9em;
+            background-color: #C7DCD2;
+            color: #2f4f4f;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .content-box {
+                margin: 20px;
+                padding: 25px;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header img {
+                margin-bottom: 10px;
+            }
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp" alt="AHS Kenyongasse Logo">
+        <h1>100 Jahre AHS Kenyongasse</h1>
+    </header>
+
+    <div class="content-box">
+        <div class="top-bar">
+            <a href="index.html" class="back-button">⬅ Startseite</a>
+        </div>
+
+        <h2>PROGRAMM</h2>
+
+        <h3>📋 Details</h3>
+        <ul class="steps">
+            <li><strong>Tagesablauf:</strong> Pausenaufsichten finden regulär statt.</li>
+            <li><strong>Frühstück:</strong> KVs holen die Semmeln von der Pforte ab und organisieren mit der Klasse ein
+                Frühstück nach eigenen Vorstellungen (Bezahlt von der Klassenkasse oder selbstorganisiert von der
+                Klasse).</li>
+            <li><strong>Schlüsselband als Geschenk:</strong> Für alle SuS gibt es ein passendes Schlüsselband als
+                Goodie. Dieses befindet sich im selben Päckchen, in dem die Semmeln sind.</li>
+            <li><strong>Zeitkapsel:</strong> Die KVs finden die Zettel für die Zeitkapsel am Montag in ihren
+                Postfächern. Jede Klasse soll eine Zeitkapsel "erstellen" (Achtung es werden bunte Stifte benötigt, die
+                nicht verblassen).</li>
+        </ul>
+
+        <h3>⬇️ Downloads</h3>
+        <a href="Anleitungen/Programm.pdf" class="menu-button" target="_blank">Programm (Vormittag)</a>
+    </div>
+
+    <footer>
+        © AHS Kenyongasse
+    </footer>
+
+</body>
+
+</html>

@@ -521,7 +521,8 @@
             <h2>🕵️ 10 Lehrer*innen - 10 Fakten</h2>
 
             <div class="score-container">
-                <div class="score total">Gesamt: <span id="totalScore">0</span></div>
+                <div class="score total">Gesamtpunkte: <span id="totalScore">0</span></div>
+                <div class="score">Punkte: <span id="score">0</span></div>
                 <div class="round">Runde: <span id="round">1</span>/10</div>
                 <div id="score-popup" class="score-popup"></div>
             </div>
@@ -616,7 +617,7 @@
             currentTeacher = remainingTeachers.pop();
 
             score = 1000;
-            //document.getElementById("score").innerText = score;
+            document.getElementById("score").innerText = score;
             document.getElementById("round").innerText = round;
 
             document.getElementById("solution").innerText = "";
@@ -706,7 +707,7 @@
             score -= 100;
             if (score < 0) score = 0;
 
-            //document.getElementById("score").innerText = score;
+            document.getElementById("score").innerText = score;
 
             //showCardPopup(card, "-10"); // 👉 NEU
         }

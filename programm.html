@@ -44,7 +44,7 @@
         .content-box {
             background: white;
             color: #333;
-            max-width: 800px;
+            max-width: 1100px;
             margin: 50px auto;
             padding: 40px;
             border-radius: 16px;
@@ -75,21 +75,7 @@
             margin-bottom: 10px;
         }
 
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 20px;
-            background: #8FAF9F;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background 0.2s;
-        }
-
-        .back-button:hover {
-            background: #6f9f8f;
-        }
-
+        .back-button,
         .menu-button {
             display: inline-block;
             padding: 12px 20px;
@@ -100,8 +86,13 @@
             transition: background 0.2s;
         }
 
+        .back-button:hover,
         .menu-button:hover {
             background: #6f9f8f;
+        }
+
+        .back-button {
+            margin-top: 30px;
         }
 
         footer {
@@ -110,6 +101,74 @@
             font-size: 0.9em;
             background-color: #C7DCD2;
             color: #2f4f4f;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        /* Tabelle */
+        .table-wrapper {
+            margin-top: 25px;
+            overflow-x: auto;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        table {
+            width: 100%;
+            min-width: 760px;
+            border-collapse: collapse;
+            font-size: 1rem;
+        }
+
+        th,
+        td {
+            border: 2px solid #222;
+            padding: 10px 12px;
+            vertical-align: top;
+        }
+
+        th {
+            background: #efefef;
+            font-size: 1.1rem;
+            text-align: left;
+        }
+
+        .row-red {
+            background: #f7d5d5;
+            color: #c40000;
+            font-weight: bold;
+        }
+
+        .row-blue {
+            background: #d8edf8;
+            color: #165b89;
+            font-weight: bold;
+        }
+
+        .row-green {
+            background: #dff0d8;
+            color: #216b28;
+            font-weight: bold;
+        }
+
+        .row-purple {
+            background: #ead7ef;
+            color: #d10000;
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .big-text {
+            font-size: 1.25rem;
+            line-height: 1.5;
         }
 
         @keyframes fadeInUp {
@@ -124,7 +183,7 @@
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             .content-box {
                 margin: 20px;
                 padding: 25px;
@@ -138,13 +197,14 @@
             header img {
                 margin-bottom: 10px;
             }
-        }
 
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
+            table {
+                font-size: 0.9rem;
+            }
+
+            .big-text {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -152,32 +212,78 @@
 <body>
 
     <header>
-        <img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp" alt="AHS Kenyongasse Logo">
+        <a href="index.html"><img src="https://www.kenyon.at/assets/images/4/bz-kenyongasse-0e39a3f7.webp" alt="AHS Kenyongasse Logo"></a>
         <h1>100 Jahre AHS Kenyongasse</h1>
     </header>
 
     <div class="content-box">
+
         <div class="top-bar">
             <a href="index.html" class="back-button">⬅ Startseite</a>
         </div>
 
         <h2>PROGRAMM</h2>
 
+        <!-- TABELLE -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Std.</th>
+                        <th>Uhrzeit</th>
+                        <th>Programm</th>
+                        <th>Wer?</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="row-red">
+                        <td>0.</td>
+                        <td>7:45–8:00</td>
+                        <td>Chor singt im Atrium / Terrasse<br>(bei Schlechtwetter: Aula)</td>
+                        <td></td>
+                    </tr>
+
+                    <tr class="row-blue">
+                        <td>1.</td>
+                        <td>8:00–8:50</td>
+                        <td>Frühstück<br>Durchführung der „Zeitkapsel“</td>
+                        <td>Klasse mit LuL</td>
+                    </tr>
+
+                    <tr class="row-green">
+                        <td>2.–4.</td>
+                        <td>8:55–11:55</td>
+                        <td class="center big-text">
+                            Fixe Stationen außerhalb der Klasse<br>
+                            und zwischendurch<br>
+                            Spiele „ToGo“ im Klassenraum
+                        </td>
+                        <td>Klasse mit LuL</td>
+                    </tr>
+
+                    <tr class="row-purple">
+                        <td>5.</td>
+                        <td>12:00–12:50</td>
+                        <td>Konzert im Schulhof<br>(Schlechtwetterprogramm: indoor im Haus)<br>danach Unterrichtsschluss</td>
+                        <td>Klasse mit LuL</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <h3>📋 Details</h3>
         <ul class="steps">
             <li><strong>Tagesablauf:</strong> Pausenaufsichten finden regulär statt.</li>
             <li><strong>Frühstück:</strong> KVs holen die Semmeln von der Pforte ab und organisieren mit der Klasse ein
-                Frühstück nach eigenen Vorstellungen (Bezahlt von der Klassenkasse oder selbstorganisiert von der
-                Klasse).</li>
-            <li><strong>Schlüsselband als Geschenk:</strong> Für alle SuS gibt es ein passendes Schlüsselband als
-                Goodie. Dieses befindet sich im selben Päckchen, in dem die Semmeln sind.</li>
-            <li><strong>Zeitkapsel:</strong> Die KVs finden die Zettel für die Zeitkapsel am Montag in ihren
-                Postfächern. Jede Klasse soll eine Zeitkapsel "erstellen" (Achtung es werden bunte Stifte benötigt, die
-                nicht verblassen).</li>
+                Frühstück nach eigenen Vorstellungen.</li>
+            <li><strong>Schlüsselband als Geschenk:</strong> Für alle SuS gibt es ein passendes Schlüsselband.</li>
+            <li><strong>Zeitkapsel:</strong> Die KVs finden die Zettel am Montag in ihren Postfächern.</li>
         </ul>
 
         <h3>⬇️ Downloads</h3>
         <a href="Anleitungen/Programm.pdf" class="menu-button" target="_blank">Programm (Vormittag)</a>
+
     </div>
 
     <footer>

@@ -601,6 +601,8 @@
         let score = 1000;
         let totalScore = 0;
 
+        let isRunning = true;
+
         /* 👉 Start */
         function initGame() {
 
@@ -707,6 +709,7 @@
             }
 
             container.classList.remove("locked"); // 👉 freigeben
+            isRunning = true;
         }
 
         /* 👉 Karten erzeugen */
@@ -781,10 +784,12 @@
 
             document.getElementById("correctBtn").style.display = "inline-block";
             document.getElementById("wrongBtn").style.display = "inline-block";
+
+            isRunning = false;
         }
 
         function answerCorrect() {
-            score += 100;
+            if (isRunning) score += 100;
 
             showSolutionPopup("+100", "#2e7d32");
 
@@ -792,7 +797,7 @@
         }
 
         function answerWrong() {
-            score -= 100;
+            if (isRunning) score -= 100;
             if (score < 0) score = 0;
 
             showSolutionPopup("-100", "#d32f2f");

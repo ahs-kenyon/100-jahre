@@ -748,7 +748,7 @@
             card.classList.add("flipped");
             card.dataset.flipped = "true";
 
-            score -= 100;
+            if (isRunning) score -= 100;
             if (score < 0) score = 0;
 
             document.getElementById("score").innerText = score;
